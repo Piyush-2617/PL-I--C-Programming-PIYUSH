@@ -1,44 +1,56 @@
-/*
-Program (35) ->Write a program to accept the details of N employees using an array of structures and display the stored employee information.
+#include <stdio.h>
 
-Solution: Array of Structure
-*/
-
-#include <stdio.h>    // Header file for input and output functions
-
-struct Employee       // Define a structure named Employee
+struct Employee
 {
-    int emp_id;       // Declare employee ID
-    char name[50];    // Declare employee name
-    float salary;     // Declare employee salary
+    int emp_id;
+    char name[50];
+    float salary;
 };
 
 int main()
 {
-    int n, i;         // Declare variables for number of employees and loop counter
+    int n, i;
 
     printf("Enter the number of employees: ");
-    scanf("%d", &n);  // Accept the number of employees
 
-    struct Employee emp[n]; // Declare an array of structures
+    if (scanf("%d", &n) != 1 || n <= 0)
+    {
+        printf("Invalid number of employees.\n");
+        return 1;
+    }
+
+    struct Employee emp[n];
 
     // Accept employee details
     for (i = 0; i < n; i++)
     {
         printf("\nEnter details of Employee %d:\n", i + 1);
-        
+
         printf("Enter Employee ID: ");
-        scanf("%d", &emp[i].emp_id); // Accept employee ID
-        
+        if (scanf("%d", &emp[i].emp_id) != 1)
+        {
+            printf("Invalid Employee ID.\n");
+            return 1;
+        }
+
         printf("Enter Employee Name: ");
-        scanf(" %[^\n]", emp[i].name); // Accept employee name with spaces
-        
+        if (scanf(" %49[^\n]", emp[i].name) != 1)
+        {
+            printf("Invalid Employee Name.\n");
+            return 1;
+        }
+
         printf("Enter Employee Salary: ");
-        scanf("%f", &emp[i].salary); // Accept employee salary
+        if (scanf("%f", &emp[i].salary) != 1)
+        {
+            printf("Invalid Salary.\n");
+            return 1;
+        }
     }
 
-    // Display stored employee details
+    // Display employee details
     printf("\n========== Employee Details ==========\n");
+
     for (i = 0; i < n; i++)
     {
         printf("\nEmployee %d:\n", i + 1);
@@ -47,5 +59,5 @@ int main()
         printf("Employee Salary: %.2f\n", emp[i].salary);
     }
 
-    return 0; // Terminate the program
+    return 0;
 }
